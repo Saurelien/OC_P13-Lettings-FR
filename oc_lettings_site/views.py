@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from .models import Letting, Profile
+
+from oc_lettings_site.models import Letting, Profile
+
+# from letting.models import Letting
+# from oc_profile.models import Profile
 
 
 """Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie quam lobortis leo consectetur ullamcorper
