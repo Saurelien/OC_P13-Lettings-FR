@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.admin.sites import AdminSite
-from .models import Address, Profile, Letting
+# from .models import Address, Letting, Profile
+from lettings.models import Address, Letting
+from profiles.models import Profile
 
 
 class MyAdminSite(AdminSite):
