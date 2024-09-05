@@ -1,13 +1,17 @@
 from django.contrib import admin
-from django.urls import path
-
+from django.urls import path, include
+from services.error_handler import custom_404_view, custom_500_view
 from . import views
+
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('lettings/', views.lettings_index, name='lettings_index'),
-    path('lettings/<int:letting_id>/', views.letting, name='letting'),
-    path('profiles/', views.profiles_index, name='profiles_index'),
-    path('profiles/<str:username>/', views.profile, name='profile'),
     path('admin/', admin.site.urls),
+    path('lettings/', include('lettings.urls', namespace='lettings')),
+    path('profiles/', include('profiles.urls', namespace='profiles')),
+    path('404', custom_404_view, name='404'),
+    path('500', custom_500_view, name='500')
 ]
+
+handler404 = custom_404_view
+handler500 = custom_500_view

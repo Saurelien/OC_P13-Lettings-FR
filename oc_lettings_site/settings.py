@@ -1,6 +1,8 @@
 import os
-
 from pathlib import Path
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,12 +13,39 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+
+def load_env_file(file_path):
+    print(f"Chargement du fichier d'environnement depuis {file_path}")
+    with open(file_path) as f:
+        for line in f:
+            if line.strip():
+                key, value = line.strip().split('=', 1)
+                value = value.strip('"').strip("'")
+                os.environ[key] = value
+
+
+if os.environ.get('RUN_MAIN') == 'true':
+    env_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config.env')
+    if os.path.exists(env_file_path):
+        load_env_file(env_file_path)
+    else:
+        print("Le fichier config.env n'existe pas au chemin spécifié.")
+    SENTRY_DSN = os.environ.get('SENTRY_DSN')
+    if not SENTRY_DSN:
+        raise ValueError("SENTRY_DSN n'est pas défini dans le fichier config.env")
+    else:
+        print("SENTRY_DSN chargé correctement.")
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        traces_sample_rate=1.0,
+        integrations=[DjangoIntegration()],
+        send_default_pii=True,
+    )
 
 # Application definition
 
