@@ -25,9 +25,6 @@ def letting(request, letting_id):
     :raises Letting.DoesNotExist: Si aucune location n'est trouvée avec l'ID fourni (erreur 404).
     """
     try:
-        if not letting_id == 999999999:
-            raise ValueError("Test afin de déclencher une erreur 500")
-
         letting = Letting.objects.get(id=letting_id)
         context = {
             'title': letting.title,
