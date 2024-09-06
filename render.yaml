@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: oc-lettings-site
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python manage.py migrate && gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT"
+    runtime: docker
+    envVars:
+      - key: SECRET_KEY
+        value: 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
+      - key: DEBUG
+        value: "False"
