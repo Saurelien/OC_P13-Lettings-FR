@@ -30,7 +30,7 @@ jobs:
       - name: Run tests with coverage
         run: |
           . venv/bin/activate
-          coverage run --source='.' manage.py test
+          coverage run manage.py test
           coverage report -m
           coverage html
         continue-on-error: false
