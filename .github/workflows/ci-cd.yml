@@ -55,6 +55,9 @@ jobs:
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/oc_lettings_site:${{ github.sha }} .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/oc_lettings_site:${{ github.sha }}
 
+      - name: List all files (debugging)
+        run: ls -la
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
