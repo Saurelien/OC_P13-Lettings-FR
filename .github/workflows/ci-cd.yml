@@ -70,6 +70,12 @@ jobs:
         run: |
           docker buildx build --push --tag $DOCKER_IMAGE:${{ github.sha }} .
 
+      - name: List Docker images
+        run: docker images
+
+      - name: Display Docker image variable
+        run: echo $DOCKER_IMAGE
+
       - name: Verify Docker build
         run: |
           docker images | grep $DOCKER_IMAGE
