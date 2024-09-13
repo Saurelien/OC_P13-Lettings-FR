@@ -46,12 +46,22 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/oc_lettings_site
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+
+      - name: Create Dockerfile
+        run: |
+          echo 'FROM python:3.11' > Dockerfile
+          echo 'WORKDIR /app' >> Dockerfile
+          echo 'COPY . /app' >> Dockerfile
+          echo 'RUN pip install --no-cache-dir -r requirements.txt' >> Dockerfile
+          echo 'EXPOSE 8000' >> Dockerfile
+          echo 'CMD ["gunicorn", "myapp.wsgi:application", "--bind", "0.0.0.0:8000"]' >> Dockerfile
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
