@@ -54,15 +54,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Create Dockerfile
-        run: |
-          echo 'FROM python:3.11' > Dockerfile
-          echo 'WORKDIR /app' >> Dockerfile
-          echo 'COPY . /app' >> Dockerfile
-          echo 'RUN pip install --no-cache-dir -r requirements.txt' >> Dockerfile
-          echo 'EXPOSE 8000' >> Dockerfile
-          echo 'CMD ["gunicorn", "myapp.wsgi:application", "--bind", "0.0.0.0:8000"]' >> Dockerfile
-
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
@@ -70,12 +61,8 @@ jobs:
         run: |
           docker buildx build --push --tag $DOCKER_IMAGE:${{ github.sha }} .
 
-      - name: List all Docker images
+      - name: List Docker images
         run: docker images
 
-      - name: Display Docker image
+      - name: Display Docker image variable
         run: echo $DOCKER_IMAGE
-
-      - name: Verification if Docker build
-        run: |
-          docker images | grep $DOCKER_IMAGE
