@@ -81,6 +81,7 @@ jobs:
     steps:
       - name: Deploy to Render
         run: |
+          # Test url de l'image docker hub push lors du build sur dockerhub
           IMAGE_URL="${{ env.DOCKER_IMAGE }}"
           curl -X POST "https://api.render.com/v1/services/${{ env.RENDER_SERVICE_ID }}/deploys" \
           -H "Authorization: Bearer $RENDER_API_KEY" \
