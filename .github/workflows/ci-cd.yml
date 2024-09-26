@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/oc_lettings_site:latest
-      RENDER_SERVICE_ID: YOUR_SERVICE_ID
+      RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
       RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
     steps:
       - name: Deploy to Render
