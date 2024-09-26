@@ -31,6 +31,7 @@ jobs:
       - name: Collect static files
         run: |
           . venv/bin/activate
+          # Test utilisation de white noise dans le test github afin d'ignorer les url manquant dans le css
           python manage.py collectstatic --noinput
 
       - name: Run tests with coverage
