@@ -28,6 +28,11 @@ jobs:
           pip install -r requirements.txt
           pip install coverage
 
+      - name: Collect static files
+        run: |
+          . venv/bin/activate
+          python manage.py collectstatic --noinput
+
       - name: Run tests with coverage
         run: |
           . venv/bin/activate
