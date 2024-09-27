@@ -89,4 +89,5 @@ jobs:
         run: |
           IMAGE_URL="${{ env.DOCKER_IMAGE }}"
           echo "Deploying image: $IMAGE_URL"
-          curl -X GET "https://api.render.com/deploy/srv-crqnm768ii6s73bgcla0?key=VLJ504xGdts"
+          curl -X GET "https://api.render.com/v1/services/${{ env.RENDER_SERVICE_ID }}/deploys" \
+          -H "Authorization: Bearer $RENDER_API_KEY" \
