@@ -8,4 +8,4 @@ RUN pip show daphne
 COPY . .
 EXPOSE 8000
 
-CMD ["daphne -b 0.0.0.0 -p $PORT oc_lettings_site.asgi:application"]
+CMD ["sh", "-c", "daphne -b 0.0.0.0 -p $PORT oc_lettings_site.asgi:application"]
