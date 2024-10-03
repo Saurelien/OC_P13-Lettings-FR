@@ -76,10 +76,13 @@ jobs:
           # Taguer l'image avec le hash de commit
           docker tag oc_lettings_site:latest $DOCKER_IMAGE:${{ github.sha }}
           docker tag oc_lettings_site:latest $DOCKER_IMAGE:latest
-  
+        
           # Pousser les images vers Docker Hub
           docker push $DOCKER_IMAGE:${{ github.sha }}
           docker push $DOCKER_IMAGE:latest
+      - name: List Docker images
+        # Liste l'image docker construite
+        run: docker images
 
   deploy:
     needs: build
