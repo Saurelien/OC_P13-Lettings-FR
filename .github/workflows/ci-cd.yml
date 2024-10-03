@@ -68,21 +68,21 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y docker-compose
 
-      - name: Build and push Docker image with commit hash and 'latest' tag
+      - name: Build Docker image
+        run: docker-compose build
+
+      - name: List Docker images
+        run: docker images
+
+      - name: Tag and push Docker images
         run: |
-          # Utiliser docker-compose pour construire l'image
-          docker-compose build
-          
-          # Taguer l'image avec le hash de commit
+          # Taguer l'image avec le hash de commit et le tag latest
           docker tag oc_lettings_site:latest $DOCKER_IMAGE:${{ github.sha }}
           docker tag oc_lettings_site:latest $DOCKER_IMAGE:latest
-        
-          # Pousser les images vers Docker Hub
+      
+          # Pousser l'images vers Docker Hub
           docker push $DOCKER_IMAGE:${{ github.sha }}
           docker push $DOCKER_IMAGE:latest
-      - name: List Docker images
-        # Liste l'image docker construite
-        run: docker images
 
   deploy:
     needs: build
