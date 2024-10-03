@@ -5,7 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: "daphne oc_lettings_site.asgi:application -p 8000"
+    image: oc_lettings_site:latest
+    command: "daphne oc_lettings_site.asgi:application -p 8000 -b 0.0.0.0"
     ports:
       - "8000:8000"
     expose:
