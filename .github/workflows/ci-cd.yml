@@ -63,19 +63,18 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
       - name: Build and push Docker image with commit hash and 'latest' tag
         run: |
-          # TESTER l'utilisation de docker-compose pour construire et pousser l'image
+          # Utiliser docker-compose pour construire et pousser l'image
           docker-compose build
           docker tag $DOCKER_IMAGE:latest $DOCKER_IMAGE:${{ github.sha }}
           docker push $DOCKER_IMAGE:${{ github.sha }}
           docker push $DOCKER_IMAGE:latest
-
-      - name: List Docker images
-        run: docker images
-
-      - name: Display Docker image variable
-        run: echo $DOCKER_IMAGE
 
   deploy:
     needs: build
