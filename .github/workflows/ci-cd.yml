@@ -70,9 +70,14 @@ jobs:
 
       - name: Build and push Docker image with commit hash and 'latest' tag
         run: |
-          # Utiliser docker-compose pour construire et pousser l'image
+          # Utiliser docker-compose pour construire l'image
           docker-compose build
-          docker tag $DOCKER_IMAGE:latest $DOCKER_IMAGE:${{ github.sha }}
+          
+          # Taguer l'image avec le hash de commit
+          docker tag oc_lettings_site:latest $DOCKER_IMAGE:${{ github.sha }}
+          docker tag oc_lettings_site:latest $DOCKER_IMAGE:latest
+  
+          # Pousser les images vers Docker Hub
           docker push $DOCKER_IMAGE:${{ github.sha }}
           docker push $DOCKER_IMAGE:latest
 
