@@ -1,8 +1,10 @@
 version: '3.8'
 
 services:
-  web:
-    build: .
+  oc_lettings_site:
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: "daphne oc_lettings_site.asgi:application -p 8000"
     ports:
       - "8000:8000"
