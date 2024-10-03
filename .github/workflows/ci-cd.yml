@@ -85,7 +85,7 @@ jobs:
       RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
       RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
     steps:
-      - name: Déploiement sur Render
+      - name: Déploiement sur Render depuis l'image avec le tag latest
         run: |
           IMAGE_URL="${{ env.DOCKER_IMAGE }}"
           echo "Deploying image: $IMAGE_URL"
