@@ -65,11 +65,11 @@ jobs:
 
       - name: Build and push Docker image with commit hash and 'latest' tag
         run: |
-          # Build et push l'image avec le commit hash tag
+          # Build et push l'image avec le hash " sha s du commit
           docker buildx build --push --tag $DOCKER_IMAGE:${{ github.sha }} .
 
           # Tag et push la même image avec le tag 'latest' tag
-          docker buildx build --push --tag $DOCKER_IMAGE:latest .
+          docker buildx build --push --tag $DOCKER_IMAGE:latest . 
 
       - name: List Docker images
         run: docker images
