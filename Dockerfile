@@ -4,5 +4,5 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 COPY . .
-COPY start.sh /app/start.sh
-CMD ["/app/start.sh"]
+COPY start.sh /usr/local/bin/start.sh
+CMD ["/usr/local/bin/start.sh"]
