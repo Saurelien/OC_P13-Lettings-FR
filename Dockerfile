@@ -2,7 +2,9 @@ FROM python:3.11
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-EXPOSE 8000
-COPY . .
 COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+COPY . .
+
+EXPOSE 8000
 CMD ["/app/start.sh"]
