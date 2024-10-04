@@ -67,18 +67,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t oc_lettings_site:latest .
-
-      - name: List Docker images
-        run: docker images
+          docker build -t $DOCKER_IMAGE:latest .
 
       - name: Tag and push Docker images
         run: |
-          docker tag oc_lettings_site:latest $DOCKER_IMAGE:${{ github.sha }}
-          docker tag oc_lettings_site:latest $DOCKER_IMAGE:latest
+          docker tag $DOCKER_IMAGE:latest $DOCKER_IMAGE:${{ github.sha }}
           docker push $DOCKER_IMAGE:${{ github.sha }}
           docker push $DOCKER_IMAGE:latest
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
