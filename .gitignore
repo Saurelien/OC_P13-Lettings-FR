@@ -5,5 +5,4 @@ venv
 config.env
 /staticfiles/
 .coverage
-/doc/
 ./
