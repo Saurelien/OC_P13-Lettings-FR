@@ -1,9 +1,5 @@
 from django.shortcuts import render
 
-# from oc_lettings_site.models import Letting, Profile
-from profiles.models import Profile
-from lettings.models import Letting
-
 
 def index(request):
     """

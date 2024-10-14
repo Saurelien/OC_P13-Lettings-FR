@@ -58,11 +58,3 @@ class IndexTestCase(TestCase):
         response = self.client.get('/lettings/nonexistent-letting/')
         self.assertEqual(response.status_code, 404)
         self.assertTemplateUsed(response, '404.html')
-
-    # def test_letting_raises_500_error(self, letting_id):
-    #     with self.settings(DEBUG=False):
-    #         response = self.client.get(reverse('lettings:letting', args=[999999999]))
-    #         self.assertEqual(response.status_code, 500)
-    #         self.assertTemplateUsed(response, '500.html')
-
-

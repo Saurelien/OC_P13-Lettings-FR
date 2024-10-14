@@ -25,4 +25,3 @@ class IndexTestCase(TestCase):
         response = self.client.get('/profiles/nonexistent-user/')
         self.assertEqual(response.status_code, 404)
         self.assertTemplateUsed(response, '404.html')
-

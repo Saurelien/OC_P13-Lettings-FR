@@ -8,7 +8,8 @@ def index(request):
     Vue pour afficher la page d'accueil du site
 
     :param request: requête HTTP.
-    :return: HttpResponse avec le template 'index.html' rendu, affichant la page d'accueil des locations
+    :return: HttpResponse avec le template 'index.html'
+     rendu, affichant la page d'accueil des locations
     """
     lettings_list = Letting.objects.all()
     context = {'lettings_list': lettings_list}
@@ -37,4 +38,3 @@ def letting(request, letting_id):
 
     except ValueError as e:
         raise Exception("Une erreur interne s'est produite: " + str(e))
-

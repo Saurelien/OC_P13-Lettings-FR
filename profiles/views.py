@@ -7,7 +7,8 @@ def index(request):
     Vue pour afficher la liste de tous les profils.
 
     :param request: L'objet de la requête HTTP.
-    :return: HttpResponse avec le template 'index.html' rendu, affichant la liste de tous les profils.
+    :return: HttpResponse avec le template 'index.html'
+     rendu, affichant la liste de tous les profils.
     """
     profiles_list = Profile.objects.all()
     context = {'profiles_list': profiles_list}
@@ -21,7 +22,8 @@ def profile(request, username):
     :param request: L'objet de la requête HTTP.
     :param username: Le nom d'utilisateur du profil à récupérer.
     :return: HttpResponse avec le template 'profile.html' rendu et les détails du profil.
-    :raises Profile.DoesNotExist: Si aucun profil n'est trouvé pour le nom d'utilisateur fourni (erreur 404).
+    :raises Profile.DoesNotExist:
+     Si aucun profil n'est trouvé pour le nom d'utilisateur fourni (erreur 404).
     """
     profile = Profile.objects.get(user__username=username)
     context = {'profile': profile}
