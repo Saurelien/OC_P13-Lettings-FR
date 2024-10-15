@@ -8,7 +8,7 @@ Documentation du site Orange County
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contenus:
 
    profiles
    lettings
