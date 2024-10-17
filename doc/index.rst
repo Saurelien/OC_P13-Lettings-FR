@@ -15,11 +15,6 @@ Documentation du site Orange County
    admin
    ReadMe
 
-Lien vers la documentation en ligne
-===================================
-
-`Documentation en ligne <https://oc-p13-lettings-fr.readthedocs.io/en/latest/>`_
-
 Indices and tables
 ==================
 

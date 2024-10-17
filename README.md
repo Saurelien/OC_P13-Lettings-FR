@@ -1,6 +1,9 @@
 ## Résumé
 
 Site web d'Orange County Lettings
+## Documentation en ligne
+
+La documentation complète du projet est disponible ici : [Documentation en ligne](https://oc-p13-lettings-fr.readthedocs.io/en/latest/)
 
 ## Développement local
 
