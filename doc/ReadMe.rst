@@ -44,6 +44,7 @@ macOS / Linux
 - Aller sur `http://localhost:8000` dans un navigateur.
 - Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
 
+
 **Linting**
 
 - `cd /path/to/Python-OC-Lettings-FR`
