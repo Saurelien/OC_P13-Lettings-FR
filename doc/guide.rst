@@ -2,13 +2,6 @@
 Guide d'Utilisation
 =======================
 
-Introduction
-============
-
-Ce guide vous explique comment utiliser l'application de gestion des locations et des profils. Cette application vous permet de gérer les informations liées aux adresses, aux locations (lettings), et aux profils des utilisateurs (élèves et tuteurs).
-
----
-
 Prérequis
 =========
 
