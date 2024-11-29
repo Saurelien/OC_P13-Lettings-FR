@@ -15,6 +15,7 @@ Documentation du site Orange County
    admin
    ReadMe
    deploy
+   guide
 
 Indices and tables
 ==================
