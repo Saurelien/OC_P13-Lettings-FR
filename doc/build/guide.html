@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Guide d’Utilisation &#8212; opc_13  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Guide de Déploiement" href="deploy.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="guide-d-utilisation">
+<h1>Guide d’Utilisation<a class="headerlink" href="#guide-d-utilisation" title="Link to this heading">¶</a></h1>
+<section id="prerequis">
+<h2>Prérequis<a class="headerlink" href="#prerequis" title="Link to this heading">¶</a></h2>
+<p>Avant de commencer à utiliser l’application, assurez-vous d’avoir :</p>
+<ol class="arabic simple">
+<li><p><strong>Environnement requis</strong> : Python 3.x et <strong>Django 3.0</strong>.</p></li>
+<li><p><strong>Base de données</strong> : SQLite est utilisée par défaut pour stocker les données.</p></li>
+</ol>
+</section>
+<section id="fonctionnalites-principales">
+<h2>Fonctionnalités Principales<a class="headerlink" href="#fonctionnalites-principales" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Gestion des adresses</strong> : Permet de créer et gérer les adresses liées aux locations.</p></li>
+<li><p><strong>Gestion des locations</strong> : Permet de créer, afficher et gérer les locations.</p></li>
+<li><p><strong>Gestion des profils</strong> : Permet aux utilisateurs de gérer leurs informations personnelles et de définir une ville préférée.</p></li>
+</ol>
+<p>—</p>
+</section>
+<section id="gestion-des-adresses">
+<h2>1. <strong>Gestion des Adresses</strong><a class="headerlink" href="#gestion-des-adresses" title="Link to this heading">¶</a></h2>
+<p>Une adresse est associée à chaque location.</p>
+<section id="attributs-d-une-adresse">
+<h3>Attributs d’une adresse :<a class="headerlink" href="#attributs-d-une-adresse" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>number</strong> : Numéro de rue (maximum 9999).</p></li>
+<li><p><strong>street</strong> : Nom de la rue (maximum 64 caractères).</p></li>
+<li><p><strong>city</strong> : Ville (maximum 64 caractères).</p></li>
+<li><p><strong>state</strong> : État (2 caractères, ex : NY).</p></li>
+<li><p><strong>zip_code</strong> : Code postal (maximum 99999).</p></li>
+<li><p><strong>country_iso_code</strong> : Code pays ISO (3 caractères, par exemple : USA).</p></li>
+</ul>
+</section>
+<section id="cas-d-utilisation">
+<h3>Cas d’Utilisation :<a class="headerlink" href="#cas-d-utilisation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Créer une nouvelle adresse</strong> :</dt><dd><ol class="arabic simple">
+<li><p>Accédez à l’interface d’administration sous <cite>Addresses</cite>.</p></li>
+<li><p>Cliquez sur <strong>Ajouter</strong>.</p></li>
+<li><p>Remplissez les informations et cliquez sur <strong>Enregistrer</strong>.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+<p>—</p>
+</section>
+</section>
+<section id="gestion-des-locations-lettings">
+<h2>2. <strong>Gestion des Locations (Lettings)</strong><a class="headerlink" href="#gestion-des-locations-lettings" title="Link to this heading">¶</a></h2>
+<p>Une location est associée à une adresse.</p>
+<section id="attributs-d-une-location">
+<h3>Attributs d’une location :<a class="headerlink" href="#attributs-d-une-location" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>title</strong> : Titre de la location (ex : “Maison au bord de la mer”).</p></li>
+<li><p><strong>address</strong> : Adresse associée (relation One-to-One avec <cite>Address</cite>).</p></li>
+</ul>
+</section>
+<section id="id1">
+<h3>Cas d’Utilisation :<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Créer une nouvelle location</strong> :</dt><dd><ol class="arabic simple">
+<li><p>Accédez à l’interface d’administration sous <cite>Lettings</cite>.</p></li>
+<li><p>Cliquez sur <strong>Ajouter</strong>.</p></li>
+<li><p>Associez une adresse et ajoutez un titre.</p></li>
+<li><p>Cliquez sur <strong>Enregistrer</strong>.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Afficher toutes les locations</strong> :</dt><dd><ol class="arabic simple">
+<li><p>Allez à la page <cite>/lettings/</cite> pour voir la liste des locations.</p></li>
+<li><p>Cliquez sur une location pour voir ses détails.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+<p>—</p>
+</section>
+</section>
+<section id="gestion-des-profils-utilisateurs">
+<h2>3. <strong>Gestion des Profils Utilisateurs</strong><a class="headerlink" href="#gestion-des-profils-utilisateurs" title="Link to this heading">¶</a></h2>
+<p>Chaque utilisateur est associé à un profil via une relation <em>One-to-One</em>.</p>
+<section id="attributs-d-un-profil">
+<h3>Attributs d’un profil :<a class="headerlink" href="#attributs-d-un-profil" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>user</strong> : L’utilisateur associé (relation One-to-One avec <cite>User</cite>).</p></li>
+<li><p><strong>favorite_city</strong> : Ville préférée de l’utilisateur.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Cas d’Utilisation :<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Créer un profil utilisateur</strong> :</dt><dd><ol class="arabic simple">
+<li><p>Accédez à l’interface d’administration sous <cite>Profiles</cite>.</p></li>
+<li><p>Cliquez sur <strong>Ajouter un profil</strong>.</p></li>
+<li><p>Sélectionnez un utilisateur existant et ajoutez une ville préférée.</p></li>
+<li><p>Cliquez sur <strong>Enregistrer</strong>.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Afficher le profil d’un utilisateur</strong> :</dt><dd><ol class="arabic simple">
+<li><p>Accédez à la page <cite>/profiles/</cite>.</p></li>
+<li><p>Recherchez un utilisateur et cliquez sur son nom pour voir les détails de son profil.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+<p>—</p>
+</section>
+</section>
+<section id="cas-d-utilisation-detailles">
+<h2>Cas d’Utilisation Détaillés<a class="headerlink" href="#cas-d-utilisation-detailles" title="Link to this heading">¶</a></h2>
+<section id="cas-1-ajouter-une-location-avec-une-nouvelle-adresse">
+<h3><strong>Cas 1 : Ajouter une location avec une nouvelle adresse</strong><a class="headerlink" href="#cas-1-ajouter-une-location-avec-une-nouvelle-adresse" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Connectez-vous à l’interface d’administration.</p></li>
+<li><p>Créez une nouvelle adresse sous <cite>Addresses</cite>.</p></li>
+<li><p>Créez une nouvelle location sous <cite>Lettings</cite>, associez l’adresse nouvellement créée.</p></li>
+<li><p>Donnez un titre à la location et enregistrez.</p></li>
+</ol>
+</section>
+<section id="cas-2-associer-une-ville-preferee-a-un-utilisateur">
+<h3><strong>Cas 2 : Associer une ville préférée à un utilisateur</strong><a class="headerlink" href="#cas-2-associer-une-ville-preferee-a-un-utilisateur" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Accédez à l’interface d’administration, section <cite>Profiles</cite>.</p></li>
+<li><p>Cliquez sur <strong>Ajouter un profil</strong>.</p></li>
+<li><p>Sélectionnez un utilisateur et ajoutez une ville préférée.</p></li>
+<li><p>Cliquez sur <strong>Enregistrer</strong>.</p></li>
+</ol>
+</section>
+<section id="cas-3-afficher-toutes-les-locations-disponibles">
+<h3><strong>Cas 3 : Afficher toutes les locations disponibles</strong><a class="headerlink" href="#cas-3-afficher-toutes-les-locations-disponibles" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Accédez à la page <cite>/lettings/</cite> et consultez la liste des locations.</p></li>
+<li><p>Cliquez sur une location pour afficher les détails.</p></li>
+</ol>
+</section>
+<section id="cas-4-rechercher-les-utilisateurs-ayant-une-ville-preferee-commencant-par-b">
+<h3><strong>Cas 4 : Rechercher les utilisateurs ayant une ville préférée commençant par “B”</strong><a class="headerlink" href="#cas-4-rechercher-les-utilisateurs-ayant-une-ville-preferee-commencant-par-b" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Ouvrez une session sqlite3 sous powershell :</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Ouvrez la db:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>.open oc-lettings-site.sqlite3</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Afficher les colonnes de la db:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>.tables</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>Afficher les informations des profiles:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>pragma table_info(profiles_profile);</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Afficher les villes favorite commencant par B:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>select user_id, favorite_city from profiles_profile where favorite_city like ‘B%’;</p></li>
+</ul>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="le-resultat-devrait-ressembler-a-ceci">
+<h3><strong>Le résultat devrait ressembler à ceci:</strong><a class="headerlink" href="#le-resultat-devrait-ressembler-a-ceci" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Use “.open FILENAME” to reopen on a persistent database.</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>sqlite&gt; .open oc-lettings-site.sqlite3</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>sqlite&gt; .tables</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>auth_group                  django_content_type</p></li>
+<li><p>auth_group_permissions      django_migrations</p></li>
+<li><p>auth_permission             django_session</p></li>
+<li><p>auth_user                   lettings_address</p></li>
+<li><p>auth_user_groups            lettings_letting</p></li>
+<li><p>auth_user_user_permissions  profiles_profile</p></li>
+<li><p>django_admin_log</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>sqlite&gt; pragma table_info(profiles_profile);</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>0|id|INTEGER|1||1</p></li>
+<li><p>1|favorite_city|varchar(64)|1||0</p></li>
+<li><p>2|user_id|INTEGER|1||0</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>sqlite&gt; select user_id, favorite_city from profiles_profile where favorite_city like ‘B%’;</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>5|Buenos Aires</p></li>
+<li><p>4|Barcelona</p></li>
+<li><p>3|Budapest</p></li>
+<li><p>2|Berlin</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">opc_13</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="profiles.html">Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lettings.html">Lettings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="admin.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReadMe.html">Résumé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReadMe.html#developpement-local">Développement local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Guide de Déploiement</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Guide d’Utilisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequis">Prérequis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fonctionnalites-principales">Fonctionnalités Principales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gestion-des-adresses">1. <strong>Gestion des Adresses</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gestion-des-locations-lettings">2. <strong>Gestion des Locations (Lettings)</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gestion-des-profils-utilisateurs">3. <strong>Gestion des Profils Utilisateurs</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cas-d-utilisation-detailles">Cas d’Utilisation Détaillés</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="deploy.html" title="previous chapter">Guide de Déploiement</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, aurelien.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/guide.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Guide de Déploiement &#8212; opc_13  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Guide d’Utilisation" href="guide.html" />
+    <link rel="prev" title="Résumé" href="ReadMe.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="guide-de-deploiement">
+<h1>Guide de Déploiement<a class="headerlink" href="#guide-de-deploiement" title="Link to this heading">¶</a></h1>
+<p>Ce guide explique comment fonctionne le pipeline CI/CD configuré pour ce projet.</p>
+<section id="structure-du-pipeline-ci-cd">
+<h2>Structure du Pipeline CI/CD<a class="headerlink" href="#structure-du-pipeline-ci-cd" title="Link to this heading">¶</a></h2>
+<p>Le pipeline est divisé en trois étapes principales : <strong>test</strong>, <strong>build</strong> et <strong>deploy</strong>. Voici un aperçu de chaque étape.</p>
+<ol class="arabic simple">
+<li><p><strong>Déclenchement</strong></p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Le pipeline s’exécute automatiquement dans les cas suivants :</dt><dd><ul>
+<li><p>Lorsqu’une modification est poussée sur les branches <cite>develop</cite> ou <cite>master</cite>.</p></li>
+<li><p>Lorsqu’une pull request est ouverte vers la branche <cite>develop</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="etape-1-tests">
+<h2>Étape 1 : Tests<a class="headerlink" href="#etape-1-tests" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Mise en place de l’environnement</strong></dt><dd><ul class="simple">
+<li><p>Télécharge le code source depuis le dépôt GitHub.</p></li>
+<li><p>Installe Python 3.11 et crée un environnement virtuel.</p></li>
+<li><p>Installe les dépendances nécessaires (spécifiées dans <cite>requirements.txt</cite>) et <cite>coverage</cite> pour mesurer la couverture des tests.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Exécution des tests</strong></dt><dd><ul class="simple">
+<li><p>Lance les tests unitaires à l’aide de <cite>coverage</cite>.</p></li>
+<li><p>Génère un rapport de couverture avec un minimum de 80%</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Archiver le rapport de couverture</strong></dt><dd><ul class="simple">
+<li><p>Le rapport HTML généré est sauvegardé comme artefact ( possible de le télécharger )</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="etape-2-build-construction-de-l-image-docker">
+<h2>Étape 2 : Build (Construction de l’image Docker)<a class="headerlink" href="#etape-2-build-construction-de-l-image-docker" title="Link to this heading">¶</a></h2>
+<p>Si les tests réussissent sur la branche <cite>master</cite>, le pipeline passe à la construction de l’image Docker.</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Préparation de l’environnement Docker</strong></dt><dd><ul class="simple">
+<li><p>Configure Docker Buildx pour la construction de l’image.</p></li>
+<li><p>Connecte le pipeline à Docker Hub en utilisant les informations d’identification stockées dans les secrets GitHub Action.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Construction de l’image Docker</strong></dt><dd><ul class="simple">
+<li><p>Construit une image Docker à partir du fichier <cite>Dockerfile</cite> de l’application.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Tag et Push</strong></p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>L’image Docker est étiquetée avec deux tags :</dt><dd><ul>
+<li><p><cite>latest</cite> : pour identifier la version la plus récente.</p></li>
+<li><p>Un tag unique basé sur le hash du commit (ex. : <cite>sha</cite>), pour un suivit du versioning.</p></li>
+<li><p>Les deux tags sont ensuite poussés sur Docker Hub.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="etape-3-deploiement-sur-render">
+<h2>Étape 3 : Déploiement sur Render<a class="headerlink" href="#etape-3-deploiement-sur-render" title="Link to this heading">¶</a></h2>
+<p>Si la construction de l’image est réussie, le pipeline déploie automatiquement l’application sur la plateforme Render.</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>Préparation des variables</strong></dt><dd><ul class="simple">
+<li><p>L’image Docker à déployer est identifiée grâce au tag <cite>latest</cite>.</p></li>
+<li><p>Les informations nécessaires au déploiement (ID du service Render et clé API) sont récupérées à partir des secrets GitHub Action.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Déploiement</strong></dt><dd><ul class="simple">
+<li><p>Utilise une requête API pour notifier Render qu’une nouvelle version de l’image Docker est disponible.</p></li>
+<li><p>Render déploie alors automatiquement cette image pour mettre à jour l’application.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="comment-personnaliser">
+<h2>Comment personnaliser ?<a class="headerlink" href="#comment-personnaliser" title="Link to this heading">¶</a></h2>
+<p>Vous pouvez ajuster le pipeline selon vos besoins :</p>
+<ul class="simple">
+<li><p><strong>Ajouter des branches au déploiement</strong> : Modifiez la section <cite>on: push</cite> pour inclure d’autres branches.</p></li>
+<li><p><strong>Modifier l’environnement</strong> : Mettez à jour les variables d’environnement ou secrets dans les paramètres GitHub.</p></li>
+<li><p><strong>Étendre les tests</strong> : Ajoutez des étapes pour d’autres types de tests ou de vérifications (linting, tests d’intégration, etc.).</p></li>
+</ul>
+</section>
+<section id="resume-des-secrets-necessaires">
+<h2>Résumé des secrets nécessaires<a class="headerlink" href="#resume-des-secrets-necessaires" title="Link to this heading">¶</a></h2>
+<p>Voici une liste des secrets GitHub Action utilisés dans ce pipeline et leur rôle :</p>
+<ul class="simple">
+<li><p><strong>SECRET_KEY</strong> : La clé Django utilisée lors des tests.</p></li>
+<li><p><strong>DOCKERHUB_USERNAME</strong> et <strong>DOCKERHUB_TOKEN</strong> : Identifiants pour accéder au Docker Hub.</p></li>
+<li><p><strong>RENDER_SERVICE_ID</strong> : Identifiant unique du service Render.</p></li>
+<li><p><strong>RENDER_API_KEY</strong> : Clé API pour interagir avec Render.</p></li>
+</ul>
+<p>—</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">opc_13</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="profiles.html">Profiles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lettings.html">Lettings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="admin.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReadMe.html">Résumé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ReadMe.html#developpement-local">Développement local</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Guide de Déploiement</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structure-du-pipeline-ci-cd">Structure du Pipeline CI/CD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etape-1-tests">Étape 1 : Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etape-2-build-construction-de-l-image-docker">Étape 2 : Build (Construction de l’image Docker)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etape-3-deploiement-sur-render">Étape 3 : Déploiement sur Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comment-personnaliser">Comment personnaliser ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resume-des-secrets-necessaires">Résumé des secrets nécessaires</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">Guide d’Utilisation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="ReadMe.html" title="previous chapter">Résumé</a></li>
+      <li>Next: <a href="guide.html" title="next chapter">Guide d’Utilisation</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, aurelien.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/deploy.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
