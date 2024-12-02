@@ -127,7 +127,7 @@ Cas d'Utilisation Détaillés
 -------
 
 **Le résultat devrait ressembler à ceci:**
-------------------------------------------
+---------------------------------------------
 
  - Use ".open FILENAME" to reopen on a persistent database.
   - sqlite> .open oc-lettings-site.sqlite3
