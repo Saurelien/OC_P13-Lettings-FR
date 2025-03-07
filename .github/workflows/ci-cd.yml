@@ -36,19 +36,12 @@ jobs:
           . venv/bin/activate
           python manage.py collectstatic --noinput
 
-      - name: Run tests with coverage
+      - name: Run test
         run: |
           . venv/bin/activate
-          coverage run manage.py test
-          coverage report -m
-          coverage html
+          python manage.py test
         continue-on-error: false
 
-      - name: Archive coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: htmlcov/
 
   build:
     needs: test
