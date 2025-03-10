@@ -4,7 +4,6 @@ Guide d'Utilisation
 
 Prérequis
 =========
----- TOTO -----
 Avant de commencer à utiliser l'application, assurez-vous d'avoir :
 
 1. **Environnement requis** : Python 3.x et **Django 3.0**.
