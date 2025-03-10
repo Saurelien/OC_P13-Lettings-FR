@@ -1,15 +1,15 @@
-services:
-  - type: web
-    name: oc-lettings-site
-    plan: free
-    buildCommand: |
-      pip install -r requirements.txt
-      pip install pytest-cov
-      pytest --cov=lettings --cov=profiles --cov-report=xml --cov-report=term
-    startCommand: "python manage.py migrate && gunicorn oc_lettings_site.wsgi:application --bind localhost:$PORT"
-    runtime: docker
-    envVars:
-      - key: SECRET_KEY
-        value: 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
-      - key: DEBUG
-        value: "False"
+#services:
+#  - type: web
+#    name: oc-lettings-site
+#    plan: free
+#    buildCommand: |
+#      pip install -r requirements.txt
+#      pip install pytest-cov
+#      pytest --cov=lettings --cov=profiles --cov-report=xml --cov-report=term
+#    startCommand: "python manage.py migrate && gunicorn oc_lettings_site.wsgi:application --bind localhost:$PORT"
+#    runtime: docker
+#    envVars:
+#      - key: SECRET_KEY
+#        value: 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
+#      - key: DEBUG
+#        value: "False"
