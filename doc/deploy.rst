@@ -23,11 +23,8 @@ Le pipeline est divisé en trois étapes principales : **test**, **build** et **
     - Installe les dépendances nécessaires (spécifiées dans `requirements.txt`) et `coverage` pour mesurer la couverture des tests.
 
 2. **Exécution des tests**
-    - Lance les tests unitaires à l'aide de `coverage`.
+    - Lance les tests unitaires à l'aide de pytest
     - Génère un rapport de couverture avec un minimum de 80%
-
-3. **Archiver le rapport de couverture**
-    - Le rapport HTML généré est sauvegardé comme artefact ( possible de le télécharger )
 
 Étape 2 : Build (Construction de l'image Docker)
 =================================================
