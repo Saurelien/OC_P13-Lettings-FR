@@ -20,7 +20,7 @@ Fonctionnalités Principales
 
 1. **Gestion des Adresses**
 ===========================
-
+---- TETS DEPLOIEMENT -----
 Une adresse est associée à chaque location.
 
 Attributs d'une adresse :
