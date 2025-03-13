@@ -30,7 +30,7 @@ Attributs d'une adresse :
 - **city** : Ville (maximum 64 caractères).
 - **state** : État (2 caractères, ex : NY).
 - **zip_code** : Code postal (maximum 99999).
-- **country_iso_code** : Code pays ISO (3 caractères, par exemple : USA).
+- **country_iso_code** : Code pays ISO (par exemple : USA).
 
 Cas d'Utilisation :
 ------------------
@@ -49,7 +49,7 @@ Une location est associée à une adresse.
 Attributs d'une location :
 --------------------------
 - **title** : Titre de la location (ex : "Maison au bord de la mer").
-- **address** : Adresse associée (relation One-to-One avec `Address`).
+- **address** : Adresse associée (relation One-to-One avec `Addresses`).
 
 Cas d'Utilisation :
 ------------------
