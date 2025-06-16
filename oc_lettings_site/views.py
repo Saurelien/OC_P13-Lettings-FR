@@ -23,5 +23,5 @@ def index(request):
 
 def trigger_sentry_error(request):
     if request.user and request.user.is_authenticated and request.user.is_staff:
-        raise Exception("Erreur intentionnelle pour la journalisation sentry")
+        raise Exception("Erreur intentionnelle pour la journalisation sentry coucou")
     return HttpResponse()
